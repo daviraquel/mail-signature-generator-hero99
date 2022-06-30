@@ -7,7 +7,7 @@ const schema = yup
   .object({
     name: yup.string().required("Nome é um campo obrigatório"),
     email: yup.string().required("E-mail é um campo obrigatório").email("Deve ser um email válido"),
-    phone: yup.string().required("Telefone é um campo obrigatório").matches(/^\d+$/, "Deve conter apenas números").min(8, "Telefones contém ao menos 8 números"),
+    phone: yup.string().required("Telefone é um campo obrigatório").matches(/^\d+$/, "Deve conter apenas números").min(8, "Deve ser um telefone válido").max(9, "Por favor insira o telefone sem o DDD"),
     ddd: yup.string().required("DDD é um campo obrigatório").matches(/^\d+$/, "Deve conter apenas números").max(2, "Apenas dois dígitos"),
   })
   .required();
@@ -58,7 +58,7 @@ export const Form = ({setUserData}) => {
         </div>
         <div>
         <label>
-          DDD:
+          DDD (sem o zero):
         </label>
         <input
           {...register("ddd")}
@@ -71,7 +71,7 @@ export const Form = ({setUserData}) => {
         </div>
         <div>
         <label>
-          Telefone:
+          Telefone (sem o DDD):
         </label>
         <input
           {...register("phone")}
